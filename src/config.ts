@@ -43,6 +43,6 @@ export const config = {
   title: process.env.NEXT_PUBLIC_BLOG_TITLE || "Navia 라이브러리",
   description:
     process.env.NEXT_PUBLIC_BLOG_DESCRIPTION ||
-    "Let's build something amazing!",
+    "웹을 넘어 클라우드로, 나비아!",
   categories,
 };

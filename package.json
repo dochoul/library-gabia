@@ -6,7 +6,8 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "import:gabia": "node scripts/fetch-gabia-posts.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
