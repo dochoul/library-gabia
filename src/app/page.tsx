@@ -12,10 +12,10 @@ import { config } from "../config";
 const { title, description } = config;
 
 export const metadata: Metadata = {
-  title: `${title} - Blog`,
+  title,
   description,
   openGraph: {
-    title: `${title} - Blog`,
+    title,
     description,
     images: [getOgImageUrl(title)],
   },
