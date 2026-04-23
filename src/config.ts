@@ -40,7 +40,7 @@ export const config = {
   baseUrl,
   logoUrl: urlJoin(baseUrl, "logo.png"),
   organization: process.env.NEXT_PUBLIC_BLOG_ORGANIZATION || "Example Org",
-  title: process.env.NEXT_PUBLIC_BLOG_TITLE || "Launched",
+  title: process.env.NEXT_PUBLIC_BLOG_TITLE || "Navia 라이브러리",
   description:
     process.env.NEXT_PUBLIC_BLOG_DESCRIPTION ||
     "Let's build something amazing!",
