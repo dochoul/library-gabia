@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
 import { config } from "@/config";
 import { Providers } from "./providers";
-
-const fontSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
-});
 
 export const metadata: Metadata = {
   title: config.title,
@@ -28,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontSans.variable} antialiased font-sans`}>
+      <body className="antialiased font-sans">
         <Providers>
           {children}
           <Footer />

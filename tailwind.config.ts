@@ -56,9 +56,9 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		},
+ 		},
   		fontFamily: {
-  			sans: ["var(--font-sans)", ...fontFamily.sans]
+ 			sans: ["Pretendard", ...fontFamily.sans]
   		},
   		keyframes: {
   			'accordion-down': {
