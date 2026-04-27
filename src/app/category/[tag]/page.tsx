@@ -23,6 +23,9 @@ export async function generateMetadata(
   return {
     title: `Blog posts tagged with #${tag}`,
     description: `List of all blog posts on ${config.organization} tagged with #${tag}`,
+    alternates: {
+      canonical: `/category/${tag}`,
+    },
     openGraph: {
       title: `Blog posts tagged with #${tag}`,
       description: `List of all blog posts on ${config.organization} tagged with #${tag}`,

@@ -6,6 +6,7 @@ import { config } from "@/config";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(config.baseUrl),
   title: config.title,
   description: config.description,
   icons: {

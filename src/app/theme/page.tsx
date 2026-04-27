@@ -8,6 +8,9 @@ const description = "Select or generate a gradient theme for your blog";
 export const metadata: Metadata = {
   title,
   description,
+  alternates: {
+    canonical: "/theme",
+  },
   openGraph: {
     title,
     description,
