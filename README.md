@@ -1,86 +1,266 @@
-# Wisp CMS Corporate Blog Template - Next.js 15
+# 블로그 구성 보고서
 
-![Wisp CMS Corporate Blog Template](https://imagedelivery.net/lLmNeOP7HXG0OqaG97wimw/cm28hgkdk000wmu7nocgku1dl/5b9708ce-413d-4065-994e-af59bdef863d.png/public)
+> **이 저장소는 OneStack 배포 테스트용 레파지토리입니다.**
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FWisp-CMS%2Fnextjs-corporate-blog-starter&env=NEXT_PUBLIC_BLOG_ID,NEXT_PUBLIC_BASE_URL,NEXT_PUBLIC_BLOG_ORGANIZATION,NEXT_PUBLIC_BLOG_TITLE,NEXT_PUBLIC_BLOG_DESCRIPTION&demo-title=Demo%20Corporate%20Blog&demo-description=Next.js%20Blog%20Starter%20Kit%20with%20Tailwind%20%26%20Shadcn%20-%20Powered%20by%20Wisp&demo-url=https%3A%2F%2Fcorporate-blog-demo.wisp.blog%2F&demo-image=https%3A%2F%2Fimagedelivery.net%2FlLmNeOP7HXG0OqaG97wimw%2Fcm28hgkdk000wmu7nocgku1dl%2F5b9708ce-413d-4065-994e-af59bdef863d.png%2Fpublic)
+- 작성일: 2026-04-23
+- GitHub 저장소: [dochoul/library-gabia](https://github.com/dochoul/library-gabia)
+- GitLab 저장소: [ui/gabia-library](https://gitlab.gabia.com/ui/gabia-library)
 
-[View Demo Blog](https://nextjs-corporate-blog-starter.vercel.app)
+## 개요
 
-## Corporate Blog Starter Template for Modern Companies & Publications
+이 프로젝트는 Wisp CMS를 데이터 소스로 쓰는 Next.js 블로그입니다.
+콘텐츠 입력과 화면 렌더링을 분리해서, CMS는 글 데이터와 관리 기능을 맡고 Next.js는 실제 사용자 화면과 SEO 산출물을 담당하는 구조입니다.
 
-Welcome to the Wisp CMS Corporate Blog Template – the most powerful and flexible solution for creating stunning corporate websites and news portals. Built on [Next.js 15](https://nextjs.org/docs/getting-started/installation), [Tailwind CSS](https://tailwindcss.com/), [Shadcn](https://ui.shadcn.com/) & [Wisp CMS](https://wisp.blog/?utm_source=github&utm_medium=web&utm_campaign=nextjs-corporate-blog-starter), this template offers an unparalleled combination of performance, SEO optimization, and user-friendly content management.
+이 구조의 핵심은 다음 세 가지입니다.
 
-### Why Choose Wisp's Corporate Blog Template?
+- 콘텐츠는 Wisp CMS에서 가져온다.
+- 화면과 라우팅은 Next.js App Router가 담당한다.
+- 메타데이터, OG 이미지, sitemap, RSS, Analytics 같은 파생 산출물은 같은 설정값과 라우팅 규칙을 공유한다.
 
-- **Corporate-Focused Design**: Sleek, professional layout perfect for businesses and publications.
-- **Multi-Theme Support**: Choose between different styles to perfectly match your corporate branding.
-- **Advanced SEO Features**: Built-in SEO optimizations to ensure your content ranks high in search results.
-- **Dynamic Table of Contents**: Improve user navigation with an automatically generated table of contents for each article.
-- **Tabbed Category Navigation**: Intuitive top-level tabs for easy browsing through different categories of blog posts or articles.
-- **Responsive Design**: Perfectly optimized for all devices, from desktop to mobile.
-- **Customizable Themes**: Easily style the blog to suit your corporate branding and needs.
-- **Fast Performance**: Utilizing Next.js 14's server components for lightning-fast page loads.
-- **Seamless Integration with Wisp CMS**: Leverage the power of Wisp CMS for effortless content creation and management.
+즉, 블로그 콘텐츠는 외부 CMS에 맡기고, 프론트엔드는 Next.js로 통제하는 전형적인 헤드리스 CMS 구성입니다.
 
-## About Wisp
+## 현재 저장소 성격
 
-Wisp is a modern CMS for adding blogs to websites. It features an intuitive, medium-like editorial experience so that you can focus on writing instead of getting distracted by markdown.
+이 저장소는 단순한 블로그 템플릿이 아니라, 실제 운영을 염두에 둔 블로그 프론트엔드에 가깝습니다.
 
-## Features
+구성상 눈에 띄는 특징은 다음과 같습니다.
 
-- Beautiful blog starter kit with server rendering using Next.js 14 Server Components
-- Responsive layout for mobile devices
-- Customizable sections of the blog
-- Filter blog posts by tags
-- Full text search over all articles
-- Automatic table of content generation
-- Automatic sitemap generation
-- Automatic Open Graph image generation
-- Automatic [Related Posts suggestions](https://www.wisp.blog/blog/suggesting-related-blog-post-with-ai-content-recommendation)
-- Render [Custom React Component](https://www.wisp.blog/docs/advance-concepts/custom-react-component) from CMS
-- RSS Feed
+- Wisp CMS를 데이터 소스로 사용한다.
+- App Router 기반으로 페이지별 메타데이터를 직접 정의한다.
+- 글 상세에는 JSON-LD 구조화 데이터를 넣는다.
+- sitemap과 RSS를 자체 생성한다.
+- Vercel Analytics를 붙여 유입 통계를 본다.
+- 검색엔진 최적화를 위해 `robots.txt`, canonical, `metadataBase`를 정리했다.
 
-## Technologies
+## 정보 구조
 
-- [Next.js 15](https://nextjs.org/blog/next-15) using App Router, TypeScript & Turbopack
-- [Wisp](https://wisp.blog/?utm_source=github&utm_medium=web&utm_campaign=nextjs-blog-cms-wisp) to manage blog posts
-- [Tailwind CSS](https://tailwindcss.com/) for CSS framework
-- [Shadcn UI](https://ui.shadcn.com/) for UI components
-- [ESLint](https://eslint.org/) for static analysis
-- [TypeScript](https://www.typescriptlang.org/) for type safety
-- Font optimization with [next/font](https://nextjs.org/docs/app/api-reference/components/font)
-## Choose from Different Themes
+사이트 전체 설정은 [`src/config.ts`](src/config.ts)에 모여 있습니다.
 
-![Multiple themes](https://imagedelivery.net/lLmNeOP7HXG0OqaG97wimw/cm28hgkdk000wmu7nocgku1dl/61d58c4a-b9e8-438b-bf57-314a4bb350c2.png/public)
+여기서 관리하는 값은 다음과 같습니다.
 
-The design is flexible, allowing you to choose from multiple themes to suit your brand. Head over to [https://corporate-blog-demo.wisp.blog/theme](https://corporate-blog-demo.wisp.blog/theme) to select preview a wide range of themes or generate your own.
+- 블로그 ID
+- 사이트 기본 URL
+- 조직명
+- 사이트 제목
+- 사이트 설명
+- 카테고리 목록
 
-Simply copy the Tailwind Class onto the [FullWidthHeader Component](/src/components/FullWidthHeader.tsx) to apply the theme to the entire blog.
+이 방식의 장점은 화면 여러 군데에서 같은 값을 중복 작성하지 않아도 된다는 점입니다.
 
+- 홈 페이지
+- 상세 페이지
+- 카테고리 페이지
+- RSS
+- OG 이미지
+- sitemap
+- JSON-LD publisher 정보
 
-## Quick Start Guide
+이런 값들을 한 군데서 관리하면 브랜드 이름과 도메인, 설명 문구가 서로 어긋날 가능성이 줄어듭니다.
 
-First, install the dependencies:
+## 콘텐츠 흐름
 
-```bash
-npm i --legacy-peer-deps
-```
+콘텐츠 조회는 [`src/lib/wisp.ts`](src/lib/wisp.ts)에서 생성한 Wisp 클라이언트를 통해 이뤄집니다.
 
-**IMPORTANT**: There's a dependency (next-themes) that's not upgraded to React 19 so you will need to add the `--legacy-peer-deps` into the install command. Make sure that Vercel's install command is set to use `npm i --legacy-peer-deps` too!
+흐름은 단순합니다.
 
-Then, copy the `.env.example` file to `.env`:
+- `config.blogId`로 Wisp 클라이언트를 만든다.
+- 홈에서 게시글 목록을 가져온다.
+- 상세 페이지에서 단일 글을 가져온다.
+- 카테고리와 태그 페이지도 같은 데이터 소스를 재사용한다.
+- 관련 글, 태그 목록, sitemap도 동일한 원천 데이터를 활용한다.
 
-```bash
-cp .env.example .env
-```
+즉, 데이터 소스는 하나이고 화면과 파생 출력만 여러 개로 나뉜 구조입니다.
 
-Note: You will need to populate the `NEXT_PUBLIC_BLOG_ID` variable with the Blog ID obtained from wisp after you've created an account.
+## 페이지 구성
 
-Finally, run the development server:
+App Router 구조를 사용하고 있습니다.
 
-```bash
-npm run dev
-```
+- [`src/app/layout.tsx`](src/app/layout.tsx)
+  - 전역 메타데이터와 공통 레이아웃을 담당합니다.
+  - `Footer`, `Providers`, `Analytics`를 여기서 한 번만 감쌉니다.
+  - `metadataBase`를 설정해 상대 경로 메타데이터 해석 기준을 운영 도메인으로 맞췄습니다.
+- [`src/app/page.tsx`](src/app/page.tsx)
+  - 블로그 홈입니다.
+  - 최신 글 목록, 필터 바, 페이지네이션이 조합됩니다.
+  - 홈 메타데이터, OG 이미지, canonical을 함께 정의합니다.
+- [`src/app/post/[slug]/page.tsx`](src/app/post/[slug]/page.tsx)
+  - 글 상세 페이지입니다.
+  - 글 본문, 작성 정보, 관련 글을 렌더링합니다.
+  - `generateMetadata`와 JSON-LD `BlogPosting` 스키마를 함께 사용합니다.
+- [`src/app/category/page.tsx`](src/app/category/page.tsx)
+  - 카테고리 목록 페이지입니다.
+  - 카테고리 인덱스 페이지에도 canonical을 넣었습니다.
+- [`src/app/category/[tag]/page.tsx`](src/app/category/[tag]/page.tsx)
+  - 태그별 글 목록 페이지입니다.
+  - 태그별 메타데이터와 canonical을 별도로 정의합니다.
+- [`src/app/theme/page.tsx`](src/app/theme/page.tsx)
+  - 테마 선택 페이지입니다.
+  - 운영용 보조 페이지지만 메타데이터를 따로 둬서 검색엔진 노출을 제어할 수 있습니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## UI 구성
 
+화면은 재사용 가능한 컴포넌트 단위로 조립됩니다.
+
+- [`src/components/FullWidthHeader.tsx`](src/components/FullWidthHeader.tsx)
+  - 페이지 상단의 큰 제목과 설명을 담당합니다.
+  - 브레드크럼도 같은 컴포넌트에서 처리합니다.
+- [`src/components/BlogPostList.tsx`](src/components/BlogPostList.tsx)
+  - 게시글 카드 목록을 렌더링합니다.
+  - 썸네일, 제목, 요약, 작성 정보가 한 단위로 묶입니다.
+- [`src/components/FilterBar.tsx`](src/components/FilterBar.tsx)
+  - 최신 글, 검색, 카테고리 필터 전환을 맡습니다.
+- [`src/components/PostPagination.tsx`](src/components/PostPagination.tsx)
+  - 페이지가 많아질 때 탐색성을 유지합니다.
+
+이 구조 덕분에 홈, 카테고리, 상세 화면이 서로 다른 페이지여도 일관된 시각 언어를 유지합니다.
+
+## 검색엔진 최적화
+
+이 프로젝트는 검색엔진이 페이지를 수집하고 이해하는 데 필요한 기술적 SEO 요소를 코드 수준에서 직접 정리한 상태입니다.
+
+### 1. 메타데이터
+
+각 페이지가 별도의 `title`, `description`, `openGraph`를 정의해 검색 결과와 공유 카드의 문구가 페이지 성격에 맞게 달라지도록 했습니다.
+
+- 홈: 사이트 제목과 설명
+- 상세: 글 제목과 요약
+- 카테고리: 목록 성격에 맞는 제목과 설명
+- 테마: 별도 페이지 설명
+
+이렇게 하면 홈, 글 상세, 카테고리, 테마 페이지가 모두 같은 메타데이터를 쓰지 않고 각각의 역할에 맞는 노출 정보를 가집니다.
+
+### 2. canonical
+
+이번에 canonical을 추가해 대표 URL을 명시했습니다.
+
+- 홈: `/`
+- 카테고리 목록: `/category`
+- 테마: `/theme`
+- 글 상세: `/post/[slug]`
+- 태그별 카테고리: `/category/[tag]`
+
+이 작업으로 쿼리스트링이나 반복 진입 경로가 생기더라도 검색엔진이 어떤 주소를 기준으로 삼아야 하는지 더 분명하게 알 수 있습니다.
+
+### 3. metadataBase
+
+[`src/app/layout.tsx`](src/app/layout.tsx)에 `metadataBase`를 넣었습니다.
+
+이 작업으로 상대 경로 메타데이터가 운영 도메인을 기준으로 해석되도록 했습니다.
+운영 도메인과 로컬 기본값이 섞이면서 canonical, OG, sitemap 주소가 엇갈리는 문제를 줄이기 위한 설정입니다.
+
+### 4. robots.txt
+
+[`src/app/robots.ts`](src/app/robots.ts)를 추가했습니다.
+
+이 파일은 검색엔진에게 다음을 명확히 알려줍니다.
+
+- 어떤 경로를 허용할지
+- sitemap 위치가 어디인지
+
+### 5. sitemap
+
+[`src/app/sitemap.ts`](src/app/sitemap.ts)를 사용해 sitemap을 자동 생성합니다.
+
+여기에는 다음이 포함됩니다.
+
+- 홈
+- 개별 글
+- 카테고리 페이지
+
+추가로, 카테고리 URL 생성 로직을 실제 라우트와 맞췄습니다.
+이전에는 `tag.id`를 사용했지만 실제 페이지는 `tag.name`을 사용하므로, sitemap이 존재하지 않는 주소를 내보내지 않도록 수정했습니다.
+
+### 6. 구조화 데이터
+
+글 상세 페이지는 JSON-LD `BlogPosting` 스키마를 출력합니다.
+
+이건 검색엔진이 글의 타입, 발행일, 수정일, 작성자, 퍼블리셔 정보를 더 정확히 이해하도록 돕습니다.
+즉, 단순 본문 HTML이 아니라 "이 페이지는 블로그 글이다"라는 의미를 기계가 읽을 수 있게 만든 것입니다.
+
+## 유입 통계와 분석
+
+이번에 Vercel Analytics를 추가했습니다.
+
+- 패키지: `@vercel/analytics`
+- 주입 위치: [`src/app/layout.tsx`](src/app/layout.tsx)
+- 목적: 페이지뷰, 방문자 수, 페이지별 유입, 리퍼러 확인
+
+이 선택의 장점은 다음과 같습니다.
+
+- 별도 분석 서버를 운영하지 않아도 된다.
+- 블로그 프론트엔드에만 가볍게 붙일 수 있다.
+- 운영 현황을 빠르게 확인할 수 있다.
+
+반대로 GA4처럼 마케팅/전환 분석 중심의 도구보다는 단순하고 가볍습니다.
+
+## RSS
+
+[`src/app/rss/route.ts`](src/app/rss/route.ts)에서 RSS 피드를 생성합니다.
+
+RSS는 여전히 구독형 소비 방식에서 유용합니다.
+
+- 최신 글을 외부 리더에서 구독할 수 있다.
+- 블로그 업데이트를 기계적으로 소비하기 쉽다.
+- SEO 직접 영향은 크지 않더라도 배포 채널 역할을 한다.
+
+## 폰트 전략
+
+이 프로젝트는 폰트를 두 층으로 나눴습니다.
+
+### 일반 화면
+
+전역 본문은 Pretendard를 씁니다.
+
+- `globals.css`에서 Pretendard 외부 CSS를 불러온다.
+- Tailwind의 `font-sans` 기본값도 Pretendard로 둔다.
+- 기존 `next/font/google` 기반 IBM Plex Sans는 제거했다.
+
+### OG 이미지
+
+SNS 공유용 이미지는 서버가 직접 그립니다.
+그래서 화면 CSS와 별개로 OG 이미지 생성 코드에서 폰트를 따로 로드합니다.
+
+- Pretendard를 우선 시도한다.
+- 원격 폰트 로드 실패 시 기존 IBM Plex Sans로 폴백한다.
+
+이 방식은 화면과 이미지의 톤을 맞추면서도, 폰트 로드 실패에 대한 안전장치를 남겨 둔 구성입니다.
+
+## 배포 관점
+
+이 프로젝트는 로컬 개발값과 배포값이 분리될 수 있는 구조입니다.
+
+- `NEXT_PUBLIC_BASE_URL`
+- `NEXT_PUBLIC_BLOG_ID`
+- `NEXT_PUBLIC_BLOG_ORGANIZATION`
+- `NEXT_PUBLIC_BLOG_DESCRIPTION`
+
+특히 `NEXT_PUBLIC_BASE_URL`은 중요합니다.
+
+- sitemap의 기준 URL
+- canonical의 기준 URL
+- JSON-LD의 publisher URL
+- RSS의 site_url
+
+이 값이 잘못되면 검색엔진이 잘못된 도메인이나 로컬 주소를 기준으로 해석할 수 있습니다.
+
+## 현재 구조의 강점
+
+이 블로그의 강점은 다음과 같습니다.
+
+- 콘텐츠와 프론트엔드가 분리되어 있다.
+- SEO 기본기를 직접 통제할 수 있다.
+- sitemap, RSS, canonical, robots, JSON-LD를 모두 코드로 관리한다.
+- Vercel Analytics로 최소한의 운영 통계를 바로 볼 수 있다.
+- WordPress처럼 무거운 범용 CMS 운영 없이도 블로그를 시작할 수 있다.
+
+## 정리
+
+현재 블로그는 다음과 같은 성격으로 구성되어 있습니다.
+
+- Wisp CMS를 콘텐츠 원천으로 쓰는 Next.js 블로그
+- 전역 설정값을 중심으로 화면, 메타데이터, OG 이미지, sitemap, RSS가 함께 움직이는 구조
+- Pretendard 기반의 한국어 친화적 타이포그래피
+- SEO와 공유 미리보기를 함께 고려한 정적-서버 혼합 렌더링
+- Vercel Analytics를 통한 가벼운 유입 통계 확보
+
+운영 관점에서 보면, 이 프로젝트는 "블로그 CMS를 직접 굴리는 프로젝트"라기보다 "Wisp를 백엔드로 쓰는 Next.js 퍼블리싱 레이어"에 가깝습니다.
