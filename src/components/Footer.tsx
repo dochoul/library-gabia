@@ -14,7 +14,7 @@ export const Footer = () => {
           <Link
             href={`https://wisp.blog/?utm_source=next-js-template&utm_medium=web&utm_campaign=${config.baseUrl}`}
           >
-            ⓒNabia Inc. All Rights Reserved.
+            ⓒNabia Inc. All Rights Reserved.~~~~~
           </Link>
         </div>
         <Link href="/rss">
