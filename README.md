@@ -6,6 +6,15 @@
 - GitHub 저장소: [dochoul/library-gabia](https://github.com/dochoul/library-gabia)
 - GitLab 저장소: [ui/gabia-library](https://gitlab.gabia.com/ui/gabia-library)
 
+## 배포 및 통계
+
+| 배포 환경 | 소스 | 통계 |
+|-----------|------|------|
+| Vercel | GitHub (`main`) | Vercel Analytics 수집 중 |
+| OneStack (Dokploy) | GitLab (`master`) | 통계 없음 |
+
+Vercel Analytics는 Vercel 배포 환경에서만 동작합니다. Dokploy 배포 버전에서 통계가 필요하면 GA4, Umami 등 별도 도구 추가가 필요합니다.
+
 ## 개요
 
 이 프로젝트는 Wisp CMS를 데이터 소스로 쓰는 Next.js 블로그입니다.
